@@ -49,10 +49,13 @@
               <goal>copy-resources</goal>
             </goals>
             <configuration>
-              <outputDirectory>${basedir}/target/conf</outputDirectory>
+	      <nonFilteredFileExtensions>                            
+    		<nonFilteredFileExtension>jar</nonFilteredFileExtension>
+	      </nonFilteredFileExtensions>
+              <outputDirectory>${basedir}/target/resources</outputDirectory>
               <resources>          
                 <resource>
-                  <directory>conf</directory>
+                  <directory>resources</directory>
                   <filtering>true</filtering>
                 </resource>
               </resources>              

@@ -15,14 +15,32 @@ public class App
         int elapse = new Random().nextInt(9)+1;
         elapse=elapse*60000;
         System.out.println("Application Started \t elapse : "+elapse);
+        
+        if(args[0].equals("restart"))
+        {
         new java.util.Timer().schedule(new java.util.TimerTask() {
+            @Override
+            public void run() {
+                Controller controller = new Controller();
+                controller.restartWSO2Server();
+            }
+        }, 
+        elapse);
+        }
+        else if (args[0].equals("kill"))
+        {
+            new java.util.Timer().schedule(new java.util.TimerTask() {
             @Override
             public void run() {
                 Controller controller = new Controller();
                 controller.findAndKill();
             }
         }, 
-        elapse 
-);
+        elapse);
+        }
+        else
+        {
+            System.out.println("Please provide operation.");
+        }
     }
 }

@@ -17,10 +17,11 @@ public class Controller {
 private ArrayList<NodeDTO> nodes;
 private int noNodes;
 private int nodeSelection;
-private final String FINDPIDSCRIPT="sh conf/findpid.sh"; 
-private final String KILLPROSSCRIPT="sh conf/killprocess.sh";
-private final String FINDANDKILL="sh "+new File("").getAbsolutePath()+"/conf/findandkill.sh";
-private final String NODESXML="conf/Nodes.xml";
+private final String FINDPIDSCRIPT="sh "+new File("").getAbsolutePath()+"/resources/findpid.sh"; 
+private final String KILLPROSSCRIPT="sh "+new File("").getAbsolutePath()+"/resources/killprocess.sh";
+private final String FINDANDKILL="sh "+new File("").getAbsolutePath()+"/resources/findandkill.sh";
+private final String RESTARTSERVER="sh "+new File("").getAbsolutePath()+"/resources/restart.sh";
+private final String NODESXML="resources/Nodes.xml";
 private String PID;
 
 public Controller()
@@ -61,8 +62,19 @@ public void findAndKill()
 {
     String cmd =FINDANDKILL+" "+nodes.get(nodeSelection).getKeyPath()+" "+nodes.get(nodeSelection).getUsername()+" "+nodes.get(nodeSelection).getIp()+" "+nodes.get(nodeSelection).getKeyword();
     ShellExecutor executor = new ShellExecutor(cmd);
-    System.out.println("process killed on "+nodes.get(nodeSelection).getIp()+" \t for keyword "+nodes.get(nodeSelection).getKeyword());
+    System.out.println("process killed on "+nodes.get(nodeSelection).getIp()+" for keyword "+nodes.get(nodeSelection).getKeyword());
     String result = executor.execute();
+}
+
+public void restartWSO2Server()
+{
+    String resPath = new File("").getAbsolutePath()+"/resources";
+    String cmd =RESTARTSERVER+" "+nodes.get(nodeSelection).getKeyPath()+" "+nodes.get(nodeSelection).getUsername()+" "+nodes.get(nodeSelection).getIp()+" "+resPath;
+    ShellExecutor executor = new ShellExecutor(cmd);
+    String result = executor.execute();
+    System.out.println(result);
+    
+    
 }
 
 }
