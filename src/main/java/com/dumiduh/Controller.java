@@ -21,6 +21,7 @@ private final String FINDPIDSCRIPT="sh "+new File("").getAbsolutePath()+"/resour
 private final String KILLPROSSCRIPT="sh "+new File("").getAbsolutePath()+"/resources/killprocess.sh";
 private final String FINDANDKILL="sh "+new File("").getAbsolutePath()+"/resources/findandkill.sh";
 private final String RESTARTSERVER="sh "+new File("").getAbsolutePath()+"/resources/restart.sh";
+private final String SHUTDOWNSERVER="sh "+new File("").getAbsolutePath()+"/resources/shutdown.sh";
 private final String NODESXML="resources/Nodes.xml";
 private String PID;
 
@@ -53,10 +54,6 @@ public void findPID()
     
 }
 
-public void killProcess()
-{
-    // to be implimented. 
-}
 
 public void findAndKill()
 {
@@ -75,6 +72,15 @@ public void restartWSO2Server()
     System.out.println(result);
     
     
+}
+
+public void shutdownWSO2Server()
+{
+    String resPath = new File("").getAbsolutePath()+"/resources";
+    String cmd =SHUTDOWNSERVER+" "+nodes.get(nodeSelection).getKeyPath()+" "+nodes.get(nodeSelection).getUsername()+" "+nodes.get(nodeSelection).getIp()+" "+resPath;
+    ShellExecutor executor = new ShellExecutor(cmd);
+    String result = executor.execute();
+    System.out.println(result);
 }
 
 }

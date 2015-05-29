@@ -38,6 +38,17 @@ public class App
         }, 
         elapse);
         }
+        else if (args[0].equals("shutdown"))
+        {
+            new java.util.Timer().schedule(new java.util.TimerTask() {
+            @Override
+            public void run() {
+                Controller controller = new Controller();
+                controller.shutdownWSO2Server();
+            }
+        }, 
+        elapse);
+        }
         else
         {
             System.out.println("Please provide operation.");
